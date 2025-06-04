@@ -12,18 +12,33 @@ export default function Register() {
     password: ''
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Registered:', formData);
-    // Add registration logic here
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const res = await fetch('/api/auth/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+
+  const data = await res.json();
+
+  if (res.ok) {
+    alert('Account created successfully!');
+    // Optionally redirect to login
+  } else {
+    alert(data.error || 'Something went wrong');
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-900 to-pink-800 flex items-center justify-center p-6">

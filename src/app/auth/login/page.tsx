@@ -11,18 +11,40 @@ export default function Login() {
     password: ''
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Logged in with:', credentials);
-    // Add login logic here
-  };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.error || 'Login failed');
+      return;
+    }
+
+    alert('Login successful!');
+    // Optionally redirect user or update UI
+  } catch (error) {
+    console.error('Login error:', error);
+    alert('Server error, please try again later.');
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-900 to-teal-800 flex items-center justify-center p-6">
