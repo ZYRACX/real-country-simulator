@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏗️ Real Country Simulator
 
-## Getting Started
+**Real Country Simulator** is a management-tycoon-style web game built with Next.js 14 and TypeScript. The game challenges players to build and manage a fictional country — balancing population, jobs, markets, and economic systems.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 🚀 Features
+
+* 🎮 UI-first gameplay in browser
+* 👷 Job and economy management simulation
+* 🧠 Modular components using React (App Router)
+* 💼 Market simulation with production and trade
+* 📃 Scalable architecture with `src/app/` and `components/`
+* 📈 State-driven updates using hooks and controlled inputs
+
+---
+
+### 🛠️ Built With
+
+* [Next.js 14 (App Router)](https://nextjs.org/docs/app)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Tailwind CSS](https://tailwindcss.com/) *(if applicable)*
+* React Hooks (`useState`, `useEffect`)
+* Local component state and UI interactions
+
+---
+
+### 📆 Project Structure (simplified)
+
+```
+/src
+  /app
+    page.tsx         # Main UI and game logic
+  /components
+    // Reusable UI blocks like JobCard, MarketTable, etc.
+  /lib
+    // (Future) Business logic utilities
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📦 Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone https://github.com/ZYRACX/real-country-simulator.git
+cd real-country-simulator
+npm install
+npm run dev
+```
 
-## Learn More
+Then open [http://localhost:3000](http://localhost:3000) to play.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🧪 Roadmap Ideas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* 💾 Add persistent storage (e.g. localStorage, Supabase)
+* 🌐 Multiplayer or trade system
+* 📊 Add graphs for economy or population growth
+* 🔐 Authentication with NextAuth or similar
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+We welcome contributions from everyone! Here's how you can get started:
+
+1. **Fork** the repository
+2. **Clone** your fork using:
+
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/real-country-simulator.git
+   ```
+3. **Create a new branch** for your feature or fix:
+
+   ```bash
+   git checkout -b feature-name
+   ```
+4. **Commit your changes** with clear messages:
+
+   ```bash
+   git commit -m "Add feature or fix bug"
+   ```
+5. **Push to your fork**:
+
+   ```bash
+   git push origin feature-name
+   ```
+6. **Open a Pull Request** against the `main` branch with a detailed description.
+
+Make sure to follow best practices for code readability and structure. Contributions should pass any linters or formatters in the repo.
+
+---
+
+### 📋 License
+
+MIT © [ZYRACX GAMING](https://github.com/ZYRACX)
