@@ -1,0 +1,18 @@
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
+
+export async function middleware(request: NextRequest) {
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+
+  // If user is not authenticated and accessing /game, redirect to login
+  if (!token && request.nextUrl.pathname.startsWith("/game")) {
+    return NextResponse.redirect(new URL("/auth/login", request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/game/:path*"], // Protect all /game routes
+};

@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { motion } from 'framer-motion';
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -11,74 +12,58 @@ export default function Login() {
     password: ''
   });
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value
     });
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-
-  try {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await signIn('credentials', {
+      email: credentials.email,
+      password: credentials.password,
+      redirect: false,
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      alert(data.error || 'Login failed');
-      return;
+    if (res?.ok) {
+      router.push('/dashboard'); // or any authenticated page
+    } else {
+      alert(res?.error || 'Invalid email or password');
     }
-
-    alert('Login successful!');
-    // Optionally redirect user or update UI
-  } catch (error) {
-    console.error('Login error:', error);
-    alert('Server error, please try again later.');
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-900 to-teal-800 flex items-center justify-center p-6">
-      <motion.div 
-        className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
+      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-center text-green-700 mb-6">Welcome Back!</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <Input 
-            type="email" 
-            name="email" 
-            placeholder="Email" 
-            value={credentials.email} 
-            onChange={handleChange} 
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={credentials.email}
+            onChange={handleChange}
             className="p-3 border rounded-lg w-full focus:ring-2 focus:ring-green-500"
             required
           />
 
-          <Input 
-            type="password" 
-            name="password" 
-            placeholder="Password" 
-            value={credentials.password} 
-            onChange={handleChange} 
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={credentials.password}
+            onChange={handleChange}
             className="p-3 border rounded-lg w-full focus:ring-2 focus:ring-green-500"
             required
           />
 
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="w-full bg-green-600 text-white py-3 rounded-lg shadow-md hover:bg-green-500 transition"
           >
             🔐 Login
@@ -88,7 +73,8 @@ const handleSubmit = async (e: React.FormEvent) => {
         <p className="mt-4 text-center text-sm text-gray-600">
           Don't have an account? <a href="/auth/register" className="text-green-500 hover:underline">Register here</a>
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 }
+

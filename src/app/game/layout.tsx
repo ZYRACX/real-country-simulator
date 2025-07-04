@@ -23,7 +23,7 @@ export default function GameLayout({
         <header className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-2 text-2xl font-bold text-blue-900">
             <Gem className="text-blue-500" />
-            <span>Business Tycoon</span>
+            <span>RCS</span>
           </div>
           <div className="space-x-2">
             <Button variant="secondary" className="bg-purple-500 text-white">
